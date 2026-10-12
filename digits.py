@@ -165,7 +165,7 @@ def cost_function_gradiant(image, valeur):
     return (deltaW_3, deltaW_2, deltaW_1, deltab_3, deltab_2, deltab_1, cost)
             
 
-# On fait 600*5 pas de gradient pour minimiser la fonction de coût (descente de gradiant)
+# On fait 600*20 pas de gradient pour minimiser la fonction de coût (descente de gradient)
 
 cost_over_time = []
 time = []
@@ -173,7 +173,7 @@ n_epoch = 20
 
 for epoch in range(n_epoch):    
 
-    nu = 0.1*(0.9**epoch)
+    nu = 0.1*(0.99**epoch)
 
     #entraînement du modèle :
     for i in range(600):
@@ -251,25 +251,6 @@ plt.xlabel('Numéro du pas de gradiant')
 plt.ylabel('Fonction de coût')
 plt.title(f"Fonction de coût au fur et à mesure de la descente de gradiant. Success rate final : {(compteur/10000)*100:.2f} %")
 plt.show()
-# On calcule le succès de notre réseau de neurones
-
-# compteur = 0
-
-# for i in range (10000):
-
-#     a_0 = linearise(x_test[i])
-#     z_1 = couche1(a_0)
-#     a_1 = ReLU_list(z_1)
-#     z_2 = couche2(a_1)
-#     a_2 = ReLU_list(z_2)
-#     z_3 = couche3(a_2)
-    
-#     y_pred = torch.argmax(z_3).item()
-
-#     if y_pred == y_test[i]:
-#         compteur +=1
-
-# print(f"Success rate : {(compteur/10000)*100:.2f} %")
 
 
     
