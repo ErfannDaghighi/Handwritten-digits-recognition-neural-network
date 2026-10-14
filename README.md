@@ -50,4 +50,10 @@ When executed, the code must run for about 10 minutes, and be updating you every
 
 The final success rate is usually about 97%. 
 
+## Effect of noise on the neural network
+
+We add gaussian stains of variable size and intensity to either images for training or for testing.
+
+There are two different approaches : either we train the model on damaged images and we look at its performance to see if it can still learn. Or we train the model normally and we see if he can recognize damaged images. 
+Performance seems to remain at the same level for stains of 0.5 intensity and radius 2, for both situations. 
 
