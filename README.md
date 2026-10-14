@@ -9,6 +9,6 @@ I wrote the gradient computation function myself in order to deeply understand t
 
 When executed, the code must run for about 10 minutes, and be updating you every 30 seconds on which epoch has been completed (out of 20 epochs). It also updates you with the current success rate. It will then give you, as an output, the graph of the cost function over the gradient descent.
 
-The final success rate is usually about 96%. 
+The final success rate is usually about 97%. 
 
 
