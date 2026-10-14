@@ -165,6 +165,25 @@ def cost_function_gradiant(image, valeur):
 
     return (deltaW_3, deltaW_2, deltaW_1, deltab_3, deltab_2, deltab_1, cost)
             
+#Création d'une fonction qui ajoute une tache gaussienne à l'image pour voir si le modèle résiste à la déterioration des data
+#Intensité de la tâche (entre 0 et 1) :
+I = 0.05
+var = 0.5
+
+def gaussien(x):
+    return 1/(var*np.sqrt(2*np.pi)) * np.exp(- x**2 / 2*(var**2))
+
+def data_loss(image):
+    noise = torch.zeros(784)
+    c = random.randint(0, 783)
+    i_c = c // 28
+    j_c = c % 28
+    for i in range (28):
+        for j in range (28):
+            d = np.sqrt((i_c - i)**2 + (j_c - j)**2)
+            noise[28*i + j] = I * gaussien(d)
+    return image + noise 
+
 
 # On fait 600*20 pas de gradient pour minimiser la fonction de coût (descente de gradient)
 
@@ -179,7 +198,7 @@ for epoch in range(n_epoch):
     #entraînement du modèle :
     for i in range(600):
 
-        training_list = [(linearise(x_train[i*100+j]),y_train[i*100+j]) for j in range(100)]
+        training_list = [(data_loss(linearise(x_train[i*100+j])),y_train[i*100+j]) for j in range(100)]
 
         deltaW_3_tot = torch.zeros(10, 64)
         deltaW_2_tot = torch.zeros(64, 128)
