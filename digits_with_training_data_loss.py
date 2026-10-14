@@ -1,3 +1,4 @@
+# Here, the question is : can the neural network still learn on a damaged dataset and have a good success rate ?
 
 import numpy as np # linear algebra
 import struct
@@ -165,27 +166,37 @@ def cost_function_gradiant(image, valeur):
 
     return (deltaW_3, deltaW_2, deltaW_1, deltab_3, deltab_2, deltab_1, cost)
             
-#Création d'une fonction qui ajoute une tache gaussienne à l'image pour voir si le modèle résiste à la déterioration des data
-#Intensité de la tâche (entre 0 et 1) :
-I = 0.05
-var = 0.5
+
+# Creation of a function which adds a gaussian stain to the image
+
+# Intensity of the stain (between 0 and 1) :
+I = 0.1
+
+# Radius of the stain in pixels (the whole image is 28 pixels long) :
+var = 1
 
 def gaussien(x):
-    return 1/(var*np.sqrt(2*np.pi)) * np.exp(- x**2 / 2*(var**2))
+    return 1/(var*np.sqrt(2*np.pi)) * np.exp(- x**2 / (2*(var**2)))
 
-def data_loss(image):
+List_Noise_Matrix=[]
+for c in range (784):
     noise = torch.zeros(784)
-    c = random.randint(0, 783)
     i_c = c // 28
     j_c = c % 28
     for i in range (28):
         for j in range (28):
             d = np.sqrt((i_c - i)**2 + (j_c - j)**2)
             noise[28*i + j] = I * gaussien(d)
-    return image + noise 
+    List_Noise_Matrix.append(noise)
 
 
-# On fait 600*20 pas de gradient pour minimiser la fonction de coût (descente de gradient)
+def data_loss(image):
+    c = random.randint(0,783)
+    return image + List_Noise_Matrix[c]
+
+
+
+# On fait 600*5 pas de gradient pour minimiser la fonction de coût (descente de gradiant)
 
 cost_over_time = []
 time = []
@@ -273,9 +284,11 @@ plt.title(f"Fonction de coût au fur et à mesure de la descente de gradiant. Su
 plt.show()
 
 
-    
-
-
-
 
     
+
+
+
+
+    
+
