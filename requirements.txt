@@ -1,3 +1,5 @@
+Python==3.13
+
 anyio==4.15.1
 appnope==1.0.0
 argon2-cffi==25.1.0
