@@ -1,4 +1,4 @@
-# Here, the question is : can the neural network still learn on a damaged dataset and have a good success rate ?
+# Here, the question is : how good is the neural network to still recognize damaged images?
 
 import numpy as np # linear algebra
 import struct
