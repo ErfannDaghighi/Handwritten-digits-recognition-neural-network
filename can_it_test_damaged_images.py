@@ -261,7 +261,7 @@ for epoch in range(n_epoch):
     for i in range (10000):
 
         #We add a gaussian stain to the images that we test 
-        a_0 = linearise(data_loss(x_test[i]))
+        a_0 = data_loss(linearise(x_test[i]))
         z_1 = couche1(a_0)
         a_1 = ReLU_list(z_1)
         z_2 = couche2(a_1)
